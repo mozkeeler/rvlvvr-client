@@ -1,0 +1,95 @@
+body, html {
+  height: 100%;
+  position: relative;
+}
+
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+header {
+  display: block;
+  font-size: 3.5rem;
+}
+
+header p {
+  display: inline-block;
+  float: left;
+  clear: both;
+  padding: 5px 5px 5px 15px;
+}
+
+a, section#users p {
+  background-color: #38f1b6;
+  color: #111;
+  text-decoration: none;
+}
+
+a:hover, section#users p:hover {
+  background-color: #fff;
+  color: #888
+}
+
+section, footer, header {
+  clear: both;
+  float: left;
+  width: 100%;
+}
+
+h1 {
+  background-color: #f8bd4a;
+  box-shadow: #111 5px 5px 0;
+  display: inline-block;
+  color: #111;
+  font-size: 1.8rem;
+  margin: 15px 15px 0 30px;
+  padding: 2px 5px;
+}
+
+section#users, section#messages {
+  clear: none;
+}
+
+section#users {
+  background-color: #eee;
+  margin-bottom: 150px;
+  width: 212px;
+}
+
+section#users p {
+  height: 100px;
+  margin-bottom: 2px;
+  padding: 5px;
+  position: relative;
+  overflow: hidden;
+}
+
+section#users p span {
+  background-color: rgba(1, 1, 1, 0.6);
+  color: #eee;
+  font-size: 1.5rem;
+  bottom: 5px;
+  left: 5px;
+  position: absolute;
+  text-transform: uppercase;
+  z-index: 2;
+}
+
+footer, header p {
+  background-color: #111;
+  color: #eee;
+}
+
+footer {
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+}
+
+footer section {
+  font-size: 1.5rem;
+  padding: 2px 15px 15px 15px;
+}

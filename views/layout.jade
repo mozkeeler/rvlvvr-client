@@ -1,0 +1,21 @@
+doctype html
+html
+  head
+    title rwrrd
+    meta(content='width=device-width, height=device-height, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0', name='viewport')
+    meta(content='yes', name='apple-mobile-web-app-capable')
+    link(rel='stylesheet', href='/css/reset.css')
+    link(rel='stylesheet', href='/css/main.css')
+
+  body(data-me='#{me}')
+    header
+      p RWRrD
+    .wrapper
+      block content
+
+    footer
+      section
+        block footer
+    script(type='text/javascript', src='/socket.io/socket.io.js', defer)
+    script(type='text/javascript', src='/js/jquery.js', defer)
+    script(type='text/javascript', src='/js/main.js', defer)
