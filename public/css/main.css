@@ -70,12 +70,16 @@ section#users p {
 section#users p span {
   background-color: rgba(1, 1, 1, 0.6);
   color: #eee;
-  font-size: 1.5rem;
-  bottom: 5px;
+  font-size: 1.3rem;
+  bottom: 1px;
   left: 5px;
   position: absolute;
   text-transform: uppercase;
   z-index: 2;
+}
+
+section#messages {
+  width: 500px;
 }
 
 footer, header p {

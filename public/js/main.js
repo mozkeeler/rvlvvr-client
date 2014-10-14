@@ -4,6 +4,7 @@ $(function () {
   var body = $('body');
   var me = body.data('me');
   var usersEl = $('#users');
+  var messagesEl = $('#messages');
   var users = [];
   var avatars = [];
 
@@ -34,5 +35,9 @@ $(function () {
         usersEl.append(p);
       });
     });
+  });
+
+  usersEl.on('click', 'p', function (ev) {
+    messagesEl.find('h1').text($(this).data('user'));
   });
 });
