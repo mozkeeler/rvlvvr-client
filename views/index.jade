@@ -5,12 +5,14 @@ block content
     input#search(autocomplete='off', placeholder='SEARCH')
   section#messages
     h1
-    #recent
+    .feed
     form#new(method='POST')
       input(type='checkbox', name='public')
       span make public? (defaults to private)
       textarea(name='message', maxlength='350')
       input(type='hidden', name='receiver', id='receiver')
+      input(type='hidden', name='senderAvatar', id='sender-avatar')
+      input(type='hidden', name='receiverAvatar', id='receiver-avatar')
       button(type='submit') send
 
 block footer

@@ -55,6 +55,13 @@ var routes = [
     config: {
       handler: services.join
     }
+  },
+  {
+    method: 'POST',
+    path: '/decrypt',
+    config: {
+      handler: services.decrypt
+    }
   }
 ];
 
