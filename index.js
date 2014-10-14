@@ -63,8 +63,13 @@ server.start(function () {
 
   io.on('connection', function (socket) {
     socket.on('join', function (user) {
+      console.log(me + '!' + user)
       socket.join(me + '!' + user);
       //services.recent(socket, format);
+    });
+
+    socket.on('disconnect', function () {
+      console.log('disconnecting ..')
     });
 
     socket.on('message', function (data) {

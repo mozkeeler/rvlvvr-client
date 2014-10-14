@@ -12,14 +12,20 @@ body {
 
 header {
   display: block;
-  font-size: 3.5rem;
+  font-size: 2.2rem;
 }
 
 header p {
   display: inline-block;
+  color: #222;
   float: left;
   clear: both;
   padding: 5px 5px 5px 15px;
+  width: 192px;
+}
+
+footer, header p {
+  background-color: #111;
 }
 
 a, section#users p {
@@ -39,23 +45,22 @@ section, footer, header {
   width: 100%;
 }
 
-h1 {
-  background-color: #f8bd4a;
-  box-shadow: #111 5px 5px 0;
-  display: inline-block;
-  color: #111;
-  font-size: 1.8rem;
-  margin: 15px 15px 0 30px;
-  padding: 2px 5px;
+#search {
+  border: 1px solid #111;
+  display: block;
+  font-size: 1.2rem;
+  clear: both;
+  float: left;
+  width: 208px;
 }
 
-section#users, section#messages {
+section#users, section#messages, #search {
   clear: none;
 }
 
 section#users {
   background-color: #eee;
-  margin-bottom: 150px;
+  margin-bottom: 50px;
   width: 212px;
 }
 
@@ -79,21 +84,48 @@ section#users p span {
 }
 
 section#messages {
-  width: 500px;
+  background-color: #f00;
+  bottom: 42px;
+  position: fixed;
+  min-height: 300px;
+  top: 0;
+  overflow: auto;
+  padding: 10px;
+  width: 680px;
+  left: 213px;
 }
 
-footer, header p {
-  background-color: #111;
-  color: #eee;
+section#messages h1 {
+  font-size: 2rem;
+  text-transform: uppercase;
+}
+
+#new {
+  bottom: 0;
+  padding: 2px;
+  position: absolute;
+  left: 0;
+  right: 10px;
+}
+
+#new textarea {
+  border: 1px solid #111;
+  font-family: Helvetica, Arial, sans-serif;
+  resize: none;
+  height: 97px;
+  padding: 5px;
+  width: 80%;
 }
 
 footer {
   bottom: 0;
   position: fixed;
+  color: #eee;
   width: 100%;
+  z-index: 3;
 }
 
 footer section {
-  font-size: 1.5rem;
-  padding: 2px 15px 15px 15px;
+  font-size: 1.2rem;
+  padding: 5px 15px;
 }

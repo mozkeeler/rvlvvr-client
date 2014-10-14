@@ -5,6 +5,7 @@ $(function () {
   var me = body.data('me');
   var usersEl = $('#users');
   var messagesEl = $('#messages');
+  var search = $('#search');
   var users = [];
   var avatars = [];
 
@@ -24,9 +25,8 @@ $(function () {
     $.getJSON('/users', function (data) {
       data.users.sort();
       users = data.users;
+      users.unshift(me);
       users.forEach(function (user) {
-        socket.emit('join', user);
-
         var p = $('<p></p>');
         var span = $('<span></span>');
         p.attr('data-user', user);
@@ -38,6 +38,21 @@ $(function () {
   });
 
   usersEl.on('click', 'p', function (ev) {
-    messagesEl.find('h1').text($(this).data('user'));
+    var user = $(this).data('user');
+    socket.emit('join', user);
+    messagesEl.find('h1').text(user);
+  });
+
+  usersEl.on('keyup', '#search', function (ev) {
+    ev.preventDefault();
+    var currKeys = $(this).val().toLowerCase();
+
+    users.forEach(function (user) {
+      if (user.indexOf(currKeys) === -1) {
+        usersEl.find('p[data-user="' + user + '"]').hide();
+      } else {
+        usersEl.find('p[data-user="' + user + '"]').show();
+      }
+    });
   });
 });

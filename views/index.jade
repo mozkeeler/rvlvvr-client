@@ -2,8 +2,15 @@ extend layout
 
 block content
   section#users
+    input#search(autocomplete='off', placeholder='SEARCH')
   section#messages
     h1
+    #recent
+    form#new(method='POST')
+      input(type='checkbox')
+      span make public? (defaults to private)
+      textarea(name='message')
+
 
 block footer
   p
