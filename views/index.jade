@@ -7,10 +7,11 @@ block content
     h1
     #recent
     form#new(method='POST')
-      input(type='checkbox')
+      input(type='checkbox', name='public')
       span make public? (defaults to private)
-      textarea(name='message')
-
+      textarea(name='message', maxlength='350')
+      input(type='hidden', name='receiver', id='receiver')
+      button(type='submit') send
 
 block footer
   p

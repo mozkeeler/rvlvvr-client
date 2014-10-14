@@ -2,7 +2,6 @@
     "domain": "localhost",
     "port": 3000,
     "me": "<keybase username>",
-    "servers": [
-      "ws://localhost:4000"
-    ]
+    "incomingServer": "ws://localhost:4000",
+    "outgoingServer": "ws://localhost:4000"
 }
