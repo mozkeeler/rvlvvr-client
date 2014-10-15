@@ -5,6 +5,7 @@ body, html {
 
 body {
   font-family: Helvetica, Arial, sans-serif;
+  font-weight: 100;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -100,12 +101,8 @@ section#messages h1 {
 }
 
 #new {
-  bottom: 0;
   padding: 2px;
   display: none;
-  position: absolute;
-  left: 0;
-  right: 10px;
 }
 
 #new textarea {
@@ -151,14 +148,13 @@ section#messages h1 {
 }
 
 footer {
-  bottom: 0;
-  position: fixed;
   color: #eee;
+  float: left;
+  clear: both;
   width: 100%;
-  z-index: 3;
 }
 
 footer section {
   font-size: 1.2rem;
-  padding: 5px 15px;
+  padding: 5px 0;
 }

@@ -7,8 +7,6 @@ var services = require('./lib/services');
 
 nconf.argv().env().file({ file: 'local.json' });
 
-var socket = require('socket.io-client')(nconf.get('outgoingServer'));
-
 var me = services.whoAmI();
 
 var options = {
@@ -47,13 +45,6 @@ var routes = [
     path: '/message',
     config: {
       handler: services.addMessage
-    }
-  },
-  {
-    method: 'POST',
-    path: '/join',
-    config: {
-      handler: services.join
     }
   },
   {

@@ -11,7 +11,6 @@ $(function () {
   var avatars = {};
 
   var socket = io(body.data('server'));
-
   var addAvatar = function (user, p, span) {
     $.getJSON('https://keybase.io/_/api/1.0/user/lookup.json?usernames=' +
       user + '&fields=pictures', function (data) {
@@ -42,7 +41,7 @@ $(function () {
     receiver.val(user);
     feed.empty();
     $('#receiver-avatar').val(avatars[user]);
-    $.post('/join', { user: user });
+    socket.emit('join', me + '!' + user);
     $(this).siblings().removeClass('selected');
     $(this).addClass('selected');
     messagesEl.find('h1').text(user);
@@ -86,9 +85,10 @@ $(function () {
   });
 
   socket.on('message', function (data) {
-    generateMessageItem(data);
-
-    if (!data.public) {
+    console.log('listening to incoming data ', data)
+    if (!!data.public) {
+      generateMessageItem(data);
+    } else {
       $.post('/decrypt', { data: data }, function (d) {
         console.log(d)
         generateMessageItem(d.data);
