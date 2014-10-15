@@ -9,10 +9,9 @@ $(function () {
   var feed = $('.feed');
   var publicBtn = $('#public-btn');
   var privateBtn = $('#private-btn');
+  var subheader = $('.subheader');
   var users = [];
   var avatars = {};
-  var user = 'ednapiranha';
-
 
   var socket = io(body.data('server'));
   var addAvatar = function (user, p, span) {
@@ -90,11 +89,9 @@ $(function () {
     $(this).addClass('selected');
     messagesEl.find('h1').text(user);
     newMsg.show();
-
+    subheader.show();
     publicBtn.click();
   });
-
-
 
   usersEl.on('keyup', '#search', function (ev) {
     ev.preventDefault();
@@ -111,7 +108,6 @@ $(function () {
 
   newMsg.on('submit', function (ev) {
     ev.preventDefault();
-
     $('#sender-avatar').val(avatars[me]);
 
     $.post('/message', $(this).serialize(), function (data) {
