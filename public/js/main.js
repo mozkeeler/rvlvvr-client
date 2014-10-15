@@ -11,6 +11,8 @@ $(function () {
   var privateBtn = $('#private-btn');
   var users = [];
   var avatars = {};
+  var user = 'ednapiranha';
+
 
   var socket = io(body.data('server'));
   var addAvatar = function (user, p, span) {
@@ -37,7 +39,7 @@ $(function () {
 
     li.find('.avatars').append(senderAvatar);
     li.append(p);
-    feed.append(li);
+    feed.prepend(li);
   };
 
   var getRecent = function (isPublic) {

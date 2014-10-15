@@ -11,16 +11,22 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+.wrapper {
+  position: relative;
+  width: 892px;
+}
+
 header {
   display: block;
   font-size: 2.2rem;
+  position: fixed;
 }
 
 header p {
   display: inline-block;
   float: left;
   clear: both;
-  padding: 5px 15px 5px 5px;
+  padding: 5px 15px 4px 5px;
   width: 192px;
 }
 
@@ -46,6 +52,16 @@ section, footer, header {
   width: 100%;
 }
 
+.subheader {
+  background-color: rgba(255, 255, 255, 0.8);
+  height: 44px;
+  position: fixed;
+  top: 0;
+  left: 213px;
+  width: 679px;
+  z-index: 3;
+}
+
 #search {
   border: 1px solid #111;
   display: block;
@@ -59,10 +75,20 @@ section#users, section#messages, #search {
   clear: none;
 }
 
+#search {
+  position: fixed;
+  top: 45px;
+  left: 0;
+}
+
 section#users {
   background-color: #eee;
   margin-bottom: 50px;
   width: 212px;
+  position: fixed;
+  bottom: 0;
+  overflow: auto;
+  top: 74px;
 }
 
 section#users p {
@@ -86,17 +112,15 @@ section#users p span {
 
 section#messages {
   background-color: #eee;
-  bottom: 42px;
-  position: fixed;
-  top: 0;
-  overflow: auto;
-  padding: 10px;
+  position: relative;
   width: 680px;
-  left: 213px;
+  float: right;
 }
 
 section#messages h1 {
-  font-size: 2rem;
+  font-size: 2.2rem;
+  line-height: 2.8rem;
+  margin-left: 10px;
   text-transform: uppercase;
 }
 
@@ -110,22 +134,27 @@ section#messages h1 {
   border: 0;
   background-color: #111;
   color: #eee;
-  width: 80px;
-  font-size: 1.1rem;
+  width: 85px;
+  font-size: 1.2rem;
+  text-transform: uppercase;
 }
 
 #new {
-  padding: 2px;
-  display: none;
+  padding: 53px 10px 5px 10px;
+  width: 90%;
 }
 
 #new textarea {
   border: 1px solid #111;
   font-family: Helvetica, Arial, sans-serif;
   resize: none;
-  height: 93px;
+  height: 85px;
   padding: 5px;
   width: 80%;
+}
+
+.feed {
+  padding: 15px 10px 10px;
 }
 
 .feed li {
