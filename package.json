@@ -16,8 +16,7 @@
     "moment": "^2.8.3",
     "nconf": "~0.6.9",
     "socket.io-client": "^1.1.0",
-    "level": "~0.18.0",
-    "twitter-text": "~1.9.4"
+    "level": "~0.18.0"
   },
   "repository": {
     "type": "git",

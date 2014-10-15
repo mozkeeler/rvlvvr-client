@@ -53,6 +53,13 @@ var routes = [
     config: {
       handler: services.decrypt
     }
+  },
+  {
+    method: 'GET',
+    path: '/recent/{user}/{isPublic}',
+    config: {
+      handler: services.recent
+    }
   }
 ];
 

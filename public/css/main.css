@@ -29,7 +29,7 @@ footer, header p {
   color: #eee;
 }
 
-a, section#users p:hover, section#users p.selected {
+a, section#users p:hover, section#users p.selected, #actions button.on, #actions button:hover {
   background-color: #38f1b6;
   color: #111;
   text-decoration: none;
@@ -100,6 +100,20 @@ section#messages h1 {
   text-transform: uppercase;
 }
 
+#actions {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+#actions button {
+  border: 0;
+  background-color: #111;
+  color: #eee;
+  width: 80px;
+  font-size: 1.1rem;
+}
+
 #new {
   padding: 2px;
   display: none;
@@ -147,14 +161,10 @@ section#messages h1 {
   margin-top: -20px;
 }
 
-footer {
+.feed time {
+  background-color: #111;
   color: #eee;
-  float: left;
-  clear: both;
-  width: 100%;
-}
-
-footer section {
-  font-size: 1.2rem;
-  padding: 5px 0;
+  bottom: 0;
+  position: absolute;
+  right: 0;
 }

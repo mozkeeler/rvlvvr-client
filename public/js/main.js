@@ -7,6 +7,8 @@ $(function () {
   var search = $('#search');
   var newMsg = $('#new');
   var feed = $('.feed');
+  var publicBtn = $('#public-btn');
+  var privateBtn = $('#private-btn');
   var users = [];
   var avatars = {};
 
@@ -21,6 +23,47 @@ $(function () {
       p.append(img).append(span);
     });
   };
+
+  var generateMessageItem = function (data) {
+    var li = $('<li><div class="avatars"></div></li>');
+    var senderAvatar = $('<div><img src="' + data.senderAvatar + '"></img></div>');
+    var p = $('<p>' + data.text + '</p>');
+
+    if (data.created) {
+      var timeEl = $('<time></time>');
+      timeEl.text(data.created);
+      li.append(timeEl);
+    }
+
+    li.find('.avatars').append(senderAvatar);
+    li.append(p);
+    feed.append(li);
+  };
+
+  var getRecent = function (isPublic) {
+    feed.empty();
+    $.get('/recent/' + user + '/' + isPublic, function (data) {
+      console.log(data)
+      if (data.messages.length > 0) {
+        data.messages.forEach(function (msg) {
+          console.log(msg.value.message)
+          generateMessageItem(msg.value.message);
+        });
+      }
+    });
+  };
+
+  publicBtn.click(function () {
+    $(this).siblings().removeClass('on');
+    $(this).addClass('on');
+    getRecent(true);
+  });
+
+  privateBtn.click(function () {
+    $(this).siblings().removeClass('on');
+    $(this).addClass('on');
+    getRecent(false);
+  });
 
   $.getJSON('/users', function (data) {
     data.users.sort();
@@ -39,14 +82,17 @@ $(function () {
   usersEl.on('click', 'p', function (ev) {
     var user = $(this).data('user');
     receiver.val(user);
-    feed.empty();
     $('#receiver-avatar').val(avatars[user]);
     socket.emit('join', me + '!' + user);
     $(this).siblings().removeClass('selected');
     $(this).addClass('selected');
     messagesEl.find('h1').text(user);
     newMsg.show();
+
+    publicBtn.click();
   });
+
+
 
   usersEl.on('keyup', '#search', function (ev) {
     ev.preventDefault();
@@ -61,16 +107,6 @@ $(function () {
     });
   });
 
-  var generateMessageItem = function (data) {
-    var li = $('<li><div class="avatars"></div></li>');
-    var senderAvatar = $('<div><img src="' + data.senderAvatar + '"></img></div>');
-    var p = $('<p>' + data.text + '</p>');
-
-    li.find('.avatars').append(senderAvatar);
-    li.append(p);
-    feed.append(li);
-  };
-
   newMsg.on('submit', function (ev) {
     ev.preventDefault();
 
@@ -78,9 +114,6 @@ $(function () {
 
     $.post('/message', $(this).serialize(), function (data) {
       console.log('posted message ', data);
-      if (!data.public) {
-        generateMessageItem(data.data);
-      }
     });
   });
 
