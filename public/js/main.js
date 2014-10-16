@@ -43,8 +43,7 @@ $(function () {
 
   var getRecent = function (isPublic) {
     feed.empty();
-    $.get('/recent/' + user + '/' + isPublic, function (data) {
-      console.log(data)
+    $.get('/recent/' + subheader.find('h1').text() + '/' + isPublic, function (data) {
       if (data.messages.length > 0) {
         data.messages.forEach(function (msg) {
           console.log(msg.value.message)
@@ -93,7 +92,7 @@ $(function () {
     publicBtn.click();
   });
 
-  usersEl.on('keyup', '#search', function (ev) {
+  search.on('keyup', function (ev) {
     ev.preventDefault();
     var currKeys = $(this).val().toLowerCase();
 
