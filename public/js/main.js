@@ -69,7 +69,7 @@ $(function () {
     var user = $(this).data('user');
     receiver.val(user);
     $('#receiver-avatar').val(avatars[user]);
-    socket.emit('join', me + '!' + user);
+    console.log('client connected');
     $(this).siblings().removeClass('selected');
     $(this).addClass('selected');
     messagesEl.find('h1').text(user);
@@ -107,7 +107,6 @@ $(function () {
       generateMessageItem(data);
     } else {
       $.post('/decrypt', { data: data }, function (d) {
-        console.log(d)
         generateMessageItem(d.data);
       });
     }

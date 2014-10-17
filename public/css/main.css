@@ -125,21 +125,6 @@ section#messages h1 {
   text-transform: uppercase;
 }
 
-#actions {
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-
-#actions button {
-  border: 0;
-  background-color: #111;
-  color: #eee;
-  width: 85px;
-  font-size: 1.2rem;
-  text-transform: uppercase;
-}
-
 #new {
   display: none;
   padding: 53px 10px 5px 10px;
