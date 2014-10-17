@@ -7,8 +7,6 @@ $(function () {
   var search = $('#search');
   var newMsg = $('#new');
   var feed = $('.feed');
-  var publicBtn = $('#public-btn');
-  var privateBtn = $('#private-btn');
   var subheader = $('.subheader');
   var users = [];
   var avatars = {};
@@ -41,9 +39,9 @@ $(function () {
     feed.prepend(li);
   };
 
-  var getRecent = function (isPublic) {
+  var getRecent = function () {
     feed.empty();
-    $.get('/recent/' + subheader.find('h1').text() + '/' + isPublic, function (data) {
+    $.get('/recent/' + subheader.find('h1').text(), function (data) {
       if (data.messages.length > 0) {
         data.messages.forEach(function (msg) {
           console.log(msg.value.message)
@@ -52,18 +50,6 @@ $(function () {
       }
     });
   };
-
-  publicBtn.click(function () {
-    $(this).siblings().removeClass('on');
-    $(this).addClass('on');
-    getRecent(true);
-  });
-
-  privateBtn.click(function () {
-    $(this).siblings().removeClass('on');
-    $(this).addClass('on');
-    getRecent(false);
-  });
 
   $.getJSON('/users', function (data) {
     data.users.sort();
@@ -89,7 +75,7 @@ $(function () {
     messagesEl.find('h1').text(user);
     newMsg.show();
     subheader.show();
-    publicBtn.click();
+    getRecent();
   });
 
   search.on('keyup', function (ev) {
@@ -109,8 +95,9 @@ $(function () {
     ev.preventDefault();
     $('#sender-avatar').val(avatars[me]);
 
-    $.post('/message', $(this).serialize(), function (data) {
-      console.log('posted message ', data);
+    $.post('/message', $(this).serialize(), function (d) {
+      console.log('posted message ', d);
+      generateMessageItem(d.data);
     });
   });
 

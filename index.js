@@ -56,7 +56,7 @@ var routes = [
   },
   {
     method: 'GET',
-    path: '/recent/{user}/{isPublic}',
+    path: '/recent/{user}',
     config: {
       handler: services.recent
     }
