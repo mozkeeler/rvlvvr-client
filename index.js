@@ -60,6 +60,13 @@ var routes = [
     config: {
       handler: services.recent
     }
+  },
+  {
+    method: 'POST',
+    path: '/remixed',
+    config: {
+      handler: services.remix
+    }
   }
 ];
 
@@ -71,7 +78,7 @@ server.route({
   config: {
     handler: {
       directory: {
-        path: './public',
+        path: './dist',
         listing: false,
         index: false
       }

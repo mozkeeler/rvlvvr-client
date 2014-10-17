@@ -155,8 +155,14 @@ section#messages h1 {
 
 .feed li .para {
   font-size: 1.2rem;
-  min-height: 122px;
-  margin-left: 160px;
+  line-height: 1.4rem;
+  min-height: 152px;
+  margin-left: 210px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  max-height: 500px;
+  padding-bottom: 10px;
+  padding-right: 10px;
 }
 
 .feed li .avatars {
@@ -183,4 +189,19 @@ section#messages h1 {
   bottom: 0;
   position: absolute;
   right: 0;
+}
+
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+}
+
+button[type="submit"] {
+  border: 0;
+  width: 100px;
+  font-size: 1.3rem;
+  display: inline-block;
+  float: right;
+  background-color: #111;
+  color: #eee;
 }
