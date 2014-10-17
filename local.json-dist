@@ -2,6 +2,6 @@
     "domain": "localhost",
     "port": 3000,
     "me": "<keybase username>",
-    "incomingServer": "http://127.0.0.1:4000",
-    "outgoingServer": "http://127.0.0.1:4000"
+    "incomingServer": "ws://rvlvvr.net",
+    "outgoingServer": "ws://rvlvvr.net"
 }
