@@ -26,16 +26,16 @@ $(function () {
   var generateMessageItem = function (data) {
     var li = $('<li><div class="avatars"></div></li>');
     var senderAvatar = $('<div><img src="' + data.senderAvatar + '"></img></div>');
-    var p = $('<p>' + data.text + '</p>');
+    var div = $('<div class="para">' + data.text + '</div>');
 
     if (data.created) {
       var timeEl = $('<time></time>');
-      timeEl.text(data.created);
+      timeEl.text(moment.unix(data.created).fromNow());
       li.append(timeEl);
     }
 
     li.find('.avatars').append(senderAvatar);
-    li.append(p);
+    li.append(div);
     feed.prepend(li);
   };
 
@@ -44,7 +44,6 @@ $(function () {
     $.get('/recent/' + subheader.find('h1').text(), function (data) {
       if (data.messages.length > 0) {
         data.messages.forEach(function (msg) {
-          console.log(msg.value.message)
           generateMessageItem(msg.value.message);
         });
       }
@@ -67,9 +66,10 @@ $(function () {
 
   usersEl.on('click', 'p', function (ev) {
     var user = $(this).data('user');
+    var keyName = [me, user].sort().join('-');
     receiver.val(user);
     $('#receiver-avatar').val(avatars[user]);
-    console.log('client connected');
+    socket.emit('join', keyName);
     $(this).siblings().removeClass('selected');
     $(this).addClass('selected');
     messagesEl.find('h1').text(user);

@@ -153,7 +153,7 @@ section#messages h1 {
   padding: 8px 0;
 }
 
-.feed li p {
+.feed li .para {
   font-size: 1.2rem;
   min-height: 122px;
   margin-left: 160px;
