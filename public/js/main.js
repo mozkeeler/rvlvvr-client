@@ -119,11 +119,10 @@ newMsg.on('submit', function (ev) {
 });
 
 socket.on('message', function (data) {
- // console.log('listening to incoming data ', data)
+  console.log('listening to incoming data ', data)
   if (data.public) {
     generateMessageItem(data);
   } else {
-    console.log('decrypting')
     $.post('/decrypt', { data: data });
   }
 });
