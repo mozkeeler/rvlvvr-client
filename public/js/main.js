@@ -85,6 +85,7 @@ usersEl.on('click', 'p', function (ev) {
   receiver.val(user);
   $('#receiver-avatar').val(avatars[user]);
   socket.emit('join', keyName);
+  socket.emit('dual', keyName);
   $(this).siblings().removeClass('selected');
   $(this).addClass('selected');
   messagesEl.find('h1').text(user);
@@ -118,10 +119,11 @@ newMsg.on('submit', function (ev) {
 });
 
 socket.on('message', function (data) {
-  console.log('listening to incoming data ', data)
+ // console.log('listening to incoming data ', data)
   if (data.public) {
     generateMessageItem(data);
   } else {
+    console.log('decrypting')
     $.post('/decrypt', { data: data });
   }
 });
