@@ -86,7 +86,12 @@ server.route({
   }
 });
 
-server.start();
+server.start(function () {
+  if (nconf.get('me').indexOf('<') > -1) {
+    throw new Error('Please change the `me` value in local.json to your keybase username (not the email)');
+    return;
+  }
+});
 
 function home(request, reply) {
   reply.view('index', {

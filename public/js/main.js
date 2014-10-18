@@ -19,7 +19,12 @@ var socket = io(body.data('server'));
 var addAvatar = function (user, p, span) {
   $.getJSON('https://keybase.io/_/api/1.0/user/lookup.json?usernames=' +
     user + '&fields=pictures', function (data) {
-    var avatar = data.them[0].pictures.primary.url;
+    var avatar = '/images/avatar.jpg';
+
+    if (data.them[0].pictures) {
+      avatar = data.them[0].pictures.primary.url;
+    }
+
     avatars[user] = avatar;
     var img = $('<img></img>');
     img.attr('src', avatar);
