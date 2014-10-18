@@ -110,7 +110,7 @@ search.on('keyup', function (ev) {
 newMsg.on('submit', function (ev) {
   ev.preventDefault();
   $('#sender-avatar').val(avatars[me]);
-
+  console.log('posting message');
   $.post('/message', $(this).serialize(), function (d) {
     console.log('posted message ', d);
     newMsg.find('textarea').val('');
@@ -124,8 +124,13 @@ socket.on('message', function (data) {
     generateMessageItem(data);
   } else {
     console.log('decrypting')
+   // console.log(data);
     $.post('/decrypt', { data: data }, function (d) {
+    }).done(function () {
+      console.log('decrypted ', d)
       generateMessageItem(d.data);
+    }).fail(function () {
+      console.log('Could not decrypt');
     });
   }
 });
