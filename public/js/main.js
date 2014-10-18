@@ -114,11 +114,9 @@ newMsg.on('submit', function (ev) {
 
 socket.on('message', function (data) {
   console.log('listening to incoming data ', data)
-  if (!!data.public) {
+  if (data.public) {
     generateMessageItem(data);
   } else {
-    $.post('/decrypt', { data: data }, function (d) {
-      generateMessageItem(d.data);
-    });
+    $.post('/decrypt', { data: data });
   }
 });
