@@ -16,8 +16,13 @@ var feed = $('#feed');
 var subheader = $('.subheader');
 var users = [];
 var avatars = {};
+var currentReceiver = '';
 
 var socket = io(body.data('server'));
+
+var sortItems = function (a, b) {
+  return ($(b).data('created')) < ($(a).data('created')) ? 1 : -1;
+}
 
 var addAvatar = function (user, p, span) {
   $.getJSON('https://keybase.io/_/api/1.0/user/lookup.json?usernames=' +
@@ -32,17 +37,6 @@ var addAvatar = function (user, p, span) {
     var img = $('<img></img>');
     img.attr('src', avatar);
     p.append(img).append(span);
-  });
-};
-
-var getRecent = function () {
-  feed.empty();
-  $.get('/recent/' + subheader.find('h1').text(), function (data) {
-    if (data.messages.length > 0) {
-      data.messages.forEach(function (msg) {
-        r.render(msg.value.message);
-      });
-    }
   });
 };
 
@@ -66,6 +60,7 @@ usersEl.on('click', 'p', function (ev) {
   var user = $(this).data('user');
   var keyName = [me, user].sort().join('-');
   receiver.val(user);
+  currentReceiver = user;
   socket.emit('join', keyName);
   socket.emit('dual', keyName);
   info.fadeOut(function () {
@@ -75,7 +70,6 @@ usersEl.on('click', 'p', function (ev) {
     messagesEl.find('h1').text(user);
     newMsg.show();
     subheader.show();
-    getRecent();
   });
 });
 
@@ -94,12 +88,14 @@ search.on('keyup', function (ev) {
 
 newMsg.on('submit', function (ev) {
   ev.preventDefault();
+  var keyName = [me, currentReceiver].sort().join('-');
+  $('.empty').remove();
   $('#sender-avatar').val(avatars[me]);
   console.log('posting message');
   $.post('/message', $(this).serialize(), function (d) {
     console.log('posted message ', d);
     newMsg.find('textarea').val('');
-    r.render(d.data);
+    socket.emit('dual', keyName);
   });
 });
 
