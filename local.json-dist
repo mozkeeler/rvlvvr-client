@@ -3,5 +3,5 @@
     "port": 3000,
     "me": "<keybase username>",
     "incomingServer": "ws://rvlvvr.net:80",
-    "outgoingServer": "ws://rvlvvr.net:80"
+    "outgoingServers": ["ws://rvlvvr.net:80"]
 }
