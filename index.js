@@ -53,20 +53,6 @@ var routes = [
     config: {
       handler: services.decrypt
     }
-  },
-  {
-    method: 'GET',
-    path: '/recent/{user}',
-    config: {
-      handler: services.recent
-    }
-  },
-  {
-    method: 'POST',
-    path: '/remixed',
-    config: {
-      handler: services.remix
-    }
   }
 ];
 
