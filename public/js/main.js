@@ -20,10 +20,6 @@ var currentReceiver = '';
 
 var socket = io(body.data('server'));
 
-var sortItems = function (a, b) {
-  return ($(b).data('created')) < ($(a).data('created')) ? 1 : -1;
-}
-
 var addAvatar = function (user, p, span) {
   $.getJSON('https://keybase.io/_/api/1.0/user/lookup.json?usernames=' +
     user + '&fields=pictures', function (data) {
@@ -56,6 +52,7 @@ $.getJSON('/users', function (data) {
 });
 
 usersEl.on('click', 'p', function (ev) {
+  feed.empty();
   var self = $(this);
   var user = $(this).data('user');
   var keyName = [me, user].sort().join('-');

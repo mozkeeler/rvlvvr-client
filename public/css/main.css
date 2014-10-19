@@ -146,7 +146,7 @@ section#users p span {
 
 section#messages {
   position: relative;
-  width: 680px;
+  width: 700px;
   margin-left: 211px;
   height: 100%;
 }
@@ -222,7 +222,7 @@ section#messages h1 {
   margin-left: 160px;
   overflow-x: hidden;
   overflow-y: auto;
-  max-height: 500px;
+  max-height: 600px;
   padding-bottom: 10px;
   padding-right: 10px;
 }
