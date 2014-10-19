@@ -1,4 +1,4 @@
-body, html {
+body, html, body > * {
   height: 100%;
   position: relative;
 }
@@ -14,12 +14,14 @@ body {
 .wrapper {
   position: relative;
   width: 892px;
+  height: 100%;
 }
 
 header {
   display: block;
   font-size: 2.2rem;
   position: fixed;
+  height: 43px;
 }
 
 header p {
@@ -53,23 +55,24 @@ section, footer, header {
 }
 
 .subheader {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(1, 1, 1, 0.8);
   display: none;
   height: 44px;
   position: fixed;
   top: 0;
-  left: 213px;
-  width: 679px;
+  left: 218px;
+  right: 0;
   z-index: 3;
 }
 
 #search {
   border: 1px solid #111;
+  border-right: 0;
   display: block;
   font-size: 1.2rem;
   clear: both;
   float: left;
-  width: 208px;
+  width: 209px;
 }
 
 section#users, section#messages, #search {
@@ -82,9 +85,23 @@ section#users, section#messages, #search {
   left: 0;
 }
 
+.info {
+  padding: 20px;
+}
+
+.info h2 {
+  font-size: 2.6rem;
+  font-weight: 500;
+}
+
+.info h3 {
+  margin-top: 40px;
+  font-size: 1.9rem;
+}
+
 section#users {
-  background-color: #eee;
-  margin-bottom: 50px;
+  background-color: #fff;
+  margin-bottom: 10px;
   width: 212px;
   position: fixed;
   bottom: 0;
@@ -95,34 +112,38 @@ section#users {
 section#users p {
   height: 100px;
   margin-bottom: 2px;
-  padding: 5px;
   position: relative;
   overflow: hidden;
+  cursor: pointer;
 }
 
 section#users p span {
-  background-color: rgba(1, 1, 1, 0.6);
-  color: #eee;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #111;
   font-size: 1.3rem;
-  bottom: 1px;
-  left: 5px;
+  line-height: 1.1rem;
+  display:  inline-block;
+  bottom: 0;
+  left: 0;
   position: absolute;
-  text-transform: uppercase;
+  padding: 2px;
   z-index: 2;
+  width: 196px;
 }
 
 section#messages {
-  background-color: #eee;
+  border-left: 5px solid #111;
   position: relative;
   width: 680px;
-  float: right;
+  margin-left: 212px;
+  height: 200%;
 }
 
 section#messages h1 {
   font-size: 2.2rem;
   line-height: 2.8rem;
   margin-left: 10px;
-  text-transform: uppercase;
+  color: #eee;
 }
 
 #new {
@@ -146,7 +167,8 @@ section#messages h1 {
 
 .feed li {
   background-color: #fff;
-  margin-bottom: 5px;
+  border-bottom: 2px solid #eee;
+  margin: 5px 0;
   box-shadow: none;
   position: relative;
   width: 100%;
@@ -156,7 +178,7 @@ section#messages h1 {
 .feed li .para {
   font-size: 1.2rem;
   line-height: 1.4rem;
-  min-height: 152px;
+  min-height: 60px;
   margin-left: 160px;
   overflow-x: hidden;
   overflow-y: auto;
@@ -184,9 +206,11 @@ section#messages h1 {
 }
 
 .feed time {
-  background-color: #111;
-  color: #eee;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #888;
   bottom: 0;
+  font-size: 1rem;
+  padding: 2px;
   position: absolute;
   right: 0;
 }

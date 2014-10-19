@@ -3,7 +3,12 @@ extend layout
 block content
   input#search(autocomplete='off', placeholder='SEARCH')
   section#users
+    p.loading Loading users ...
   section#messages
+    div.info
+      h2 Select the person you want to message on the left.
+      h3 By default, messages are sent encrypted and set as private.
+      h3 If you want everyone to see, check the public option before sending. These will not be encrypted.
     .subheader
       h1
     form#new(method='POST')
