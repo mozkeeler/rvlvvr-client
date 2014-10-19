@@ -1,6 +1,7 @@
 var $ = require('jquery');
 var io = require('socket.io-client');
 var moment = require('moment');
+var r = require('./render');
 
 var body = $('body');
 var me = body.data('me');
@@ -11,7 +12,7 @@ var search = $('#search');
 var loading = $('.loading');
 var info = $('.info');
 var newMsg = $('#new');
-var feed = $('.feed');
+var feed = $('#feed');
 var subheader = $('.subheader');
 var users = [];
 var avatars = {};
@@ -34,33 +35,12 @@ var addAvatar = function (user, p, span) {
   });
 };
 
-var generateMessageItem = function (data) {
-  $.post('/remixed', { content: data.text, created: data.created }, function (result) {
-    console.log('received webremix media ', result.text)
-    feed.find('li[data-created="' + data.created + '"] .para').html(result.text);
-  });
-
-  var li = $('<li data-created="' + data.created + '"><div class="avatars"></div></li>');
-  var senderAvatar = $('<div><img src="' + data.senderAvatar + '"></img></div>');
-  var div = $('<div class="para"></div>');
-
-  if (data.created) {
-    var timeEl = $('<time></time>');
-    timeEl.text(moment.unix(data.created).fromNow());
-    li.append(timeEl);
-  }
-
-  li.find('.avatars').append(senderAvatar);
-  li.append(div);
-  feed.prepend(li);
-};
-
 var getRecent = function () {
   feed.empty();
   $.get('/recent/' + subheader.find('h1').text(), function (data) {
     if (data.messages.length > 0) {
       data.messages.forEach(function (msg) {
-        generateMessageItem(msg.value.message);
+        r.render(msg.value.message);
       });
     }
   });
@@ -119,7 +99,7 @@ newMsg.on('submit', function (ev) {
   $.post('/message', $(this).serialize(), function (d) {
     console.log('posted message ', d);
     newMsg.find('textarea').val('');
-    generateMessageItem(d.data);
+    r.render(d.data);
   });
 });
 
@@ -127,11 +107,11 @@ socket.on('message', function (data) {
   if (feed.find('li[data-created="' + data.created + '"]').length === 0) {
     console.log('listening to incoming data ', data)
     if (data.public) {
-      generateMessageItem(data);
+      r.render(data);
     } else {
       $.post('/decrypt', { data: data }, function (d) {
       }).done(function (d) {
-        generateMessageItem(d.data);
+        r.render(d.data);
       }).fail(function () {
         console.log('Could not decrypt', data.created);
       });

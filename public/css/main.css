@@ -89,6 +89,11 @@ section#users, section#messages, #search {
   padding: 20px;
 }
 
+.loading {
+  padding: 10px;
+  font-size: 1.1rem;
+}
+
 .info h2 {
   font-size: 2.6rem;
   font-weight: 500;
@@ -161,21 +166,37 @@ section#messages h1 {
   width: 80%;
 }
 
-.feed {
+#feed {
   padding: 15px 10px 10px;
 }
 
-.feed li {
+#feed li {
   background-color: #fff;
   border-bottom: 2px solid #eee;
   margin: 5px 0;
-  box-shadow: none;
   position: relative;
   width: 100%;
   padding: 8px 0;
 }
 
-.feed li .para {
+#feed li.private small {
+  border-radius: 100px;
+  background-color: #fff;
+  color: #777;
+  opacity: 0.65;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  font-size: 0.8rem;
+  line-height: 1.3rem;
+  font-weight: bold;
+  z-index: 2;
+  position: absolute;
+  left: 128px;
+  top: 10px;
+}
+
+#feed li .para {
   font-size: 1.2rem;
   line-height: 1.4rem;
   min-height: 60px;
@@ -187,25 +208,25 @@ section#messages h1 {
   padding-right: 10px;
 }
 
-.feed li .avatars {
+#feed li .avatars {
   float: left;
   height: 40px;
   width: 100px;
   position: relative;
 }
 
-.feed li .avatars div {
+#feed li .avatars div {
   height: 70px;
   width: 150px;
   overflow: hidden;
   position: relative;
 }
 
-.feed li img {
+#feed li img {
   margin-top: -20px;
 }
 
-.feed time {
+#feed time {
   background-color: rgba(255, 255, 255, 0.8);
   color: #888;
   bottom: 0;

@@ -96,6 +96,6 @@ server.start(function () {
 function home(request, reply) {
   reply.view('index', {
     me: nconf.get('me'),
-    socketServer: nconf.get('outgoingServer')
+    socketServer: nconf.get('incomingServer')
   });
 }
