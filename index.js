@@ -2,6 +2,7 @@
 
 var Hapi = require('hapi');
 var nconf = require('nconf');
+var SocketIO = require('socket.io');
 
 var services = require('./lib/services');
 
@@ -42,13 +43,6 @@ var routes = [
   },
   {
     method: 'POST',
-    path: '/message',
-    config: {
-      handler: services.addMessage
-    }
-  },
-  {
-    method: 'POST',
     path: '/decrypt',
     config: {
       handler: services.decrypt
@@ -77,6 +71,22 @@ server.start(function () {
     throw new Error('Please change the `me` value in local.json to your keybase username (not the email)');
     return;
   }
+
+  var io = SocketIO.listen(server.listener);
+
+  io.on('connection', function (socket) {
+    console.log('connected to local socket');
+
+    socket.on('recent', function (data) {
+      services.recent(data, socket);
+    });
+
+    socket.on('local', function (data) {
+      console.log('incoming local data ', data)
+
+      services.addMessage(data, socket);
+    });
+  });
 });
 
 function home(request, reply) {

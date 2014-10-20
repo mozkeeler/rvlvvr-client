@@ -19,6 +19,7 @@ var avatars = {};
 var currentReceiver = '';
 
 var socket = io(body.data('server'));
+var localSocket = io();
 
 var addAvatar = function (user, p, span) {
   $.getJSON('https://keybase.io/_/api/1.0/user/lookup.json?usernames=' +
@@ -60,6 +61,7 @@ usersEl.on('click', 'p', function (ev) {
   currentReceiver = user;
   socket.emit('join', keyName);
   socket.emit('dual', keyName);
+  localSocket.emit('recent', user);
   info.fadeOut(function () {
     $('#receiver-avatar').val(avatars[user]);
     self.siblings().removeClass('selected');
@@ -86,14 +88,30 @@ search.on('keyup', function (ev) {
 newMsg.on('submit', function (ev) {
   ev.preventDefault();
   var keyName = [me, currentReceiver].sort().join('-');
+  var isPublic = false;
+  if ($('input[name="public"]').is(':checked')) {
+    isPublic = true;
+  }
+
   $('.empty').remove();
   $('#sender-avatar').val(avatars[me]);
   console.log('posting message');
-  $.post('/message', $(this).serialize(), function (d) {
-    console.log('posted message ', d);
-    newMsg.find('textarea').val('');
-    socket.emit('dual', keyName);
-  });
+  localSocket.emit('local', JSON.stringify({
+    message: $('textarea[name="message"]').val(),
+    receiver: $('#receiver').val(),
+    senderAvatar: $('#sender-avatar').val(),
+    receiverAvatar: $('#receiver-avatar').val(),
+    public: isPublic
+  }));
+
+  newMsg.find('textarea').val('');
+});
+
+localSocket.on('local', function (data) {
+  if (feed.find('li[data-created="' + data.created + '"]').length === 0) {
+    console.log('listening to incoming local data ', data)
+    r.render(data);
+  }
 });
 
 socket.on('message', function (data) {
