@@ -13,10 +13,9 @@ exports.render = function (data) {
     var li = $('<li data-created="' + data.created + '" class="' + isPublic + '"><div class="avatars"></div></li>');
     var senderAvatar = $('<div><img src="' + data.senderAvatar + '"></img></div>');
     var senderLabel = $('<span class="label">' + data.sender + '</span>');
-
     var div = $('<div class="para"></div>');
 
-    if (!data.public) {
+    if (!data.public && data.text.indexOf('-----BEGIN PGP MESSAGE-----') > -1) {
       var pre = $('<pre></pre>');
       pre.text(data.text);
       div.append(pre);
